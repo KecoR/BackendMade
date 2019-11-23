@@ -12,13 +12,31 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
+Route::match(['GET', 'POST'], '/register', function(){
+    return redirect('/login');
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::prefix('roles')->group(function(){
+    Route::get('/','RoleController@index')->name('roles');
+    Route::get('/delete/{id}','RoleController@delete')->name('roles.delete');
+    Route::get('/getData/{id}','RoleController@getdata')->name('roles.get');
 
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::post('/add','RoleController@add')->name('roles.add');
+    Route::post('/edit','RoleController@edit')->name('roles.edit');
+});
+
+Route::prefix('users')->group(function(){
+    Route::get('/','UserController@index')->name('users');
+    Route::get('/delete/{id}','UserController@delete')->name('users.delete');
+    Route::get('/getData/{id}','UserController@getdata')->name('users.get');
+
+    Route::post('/add','UserController@add')->name('users.add');
+    Route::post('/edit','UserController@edit')->name('users.edit');
+});

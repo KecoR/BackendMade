@@ -13,7 +13,7 @@ class CreateVacancysTable extends Migration
      */
     public function up()
     {
-        Schema::create('vacancys', function (Blueprint $table) {
+        Schema::create('vacancies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('judul');
             $table->longText('alamat');

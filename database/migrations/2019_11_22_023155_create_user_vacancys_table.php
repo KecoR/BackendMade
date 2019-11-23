@@ -13,7 +13,7 @@ class CreateUserVacancysTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_vacancys', function (Blueprint $table) {
+        Schema::create('user_vacancies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('vacancys_id');
             $table->bigInteger('pelamar_id');
