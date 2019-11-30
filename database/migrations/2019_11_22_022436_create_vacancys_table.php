@@ -21,6 +21,7 @@ class CreateVacancysTable extends Migration
             $table->string('gaji');
             $table->string('tipe_gaji');
             $table->string('slot');
+            $table->string('buruh')->nullable();
             $table->string('luas_lahan');
             $table->string('latitude');
             $table->string('longitude');
@@ -37,6 +38,6 @@ class CreateVacancysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vacancys');
+        Schema::dropIfExists('vacancies');
     }
 }

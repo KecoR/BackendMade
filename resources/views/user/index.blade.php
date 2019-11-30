@@ -137,6 +137,8 @@
             <div class="modal-content">
                 <form method="POST" action="{{ route('users.edit') }}">
                     <input type="hidden" value="" id="id" name="id">
+                    <input type="hidden" value="" id="old_password" name="old_password">
+                    <input type="hidden" value="" id="old_tgl_lahir" name="old_tgl_lahir">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Perubahan Data</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -145,9 +147,56 @@
                     </div>
                     <div class="modal-body">
                     @csrf
-                        <div class="form-group">
-                            <label>Role Deskripsi</label>
-                            <input type="text" class="form-control" name="role_desc" id="role_desc">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nama Lengkap</label>
+                                    <input type="text" class="form-control" name="name" id="name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="email" id="email" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select name="role_id" class="form-control" id="role_id">
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->id }}">{{ $role->role_desc }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Umur</label>
+                                    <input type="number" class="form-control" min="17" max="60" name="umur" value="17" id="umur">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Telp</label>
+                                    <input type="text" class="form-control" name="telp" id="telp">
+                                </div>
+                                <div class="form-group">
+                                    <label>Jenis Kelamin</label>
+                                    <select name="jenis_kel" class="form-control" id="jenis_kel">
+                                        <option value="Laki-Laki">Laki-Laki</option>
+                                        <option value="Perempuan">Perempuan</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tanggal Lahir</label>
+                                    <input type="text" id="tgl_lahir" class="form-control" disabled>
+                                    <br>
+                                    <input type="date" name="tgl_lahir" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Alamat</label>
+                                    <textarea name="alamat" class="form-control" id="alamat"></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -171,7 +220,14 @@
             let data_id = $(this).attr('data-id');
             $.get('/users/getData/'+data_id, function(data){
                 $("#id").val(data.id);
-                $("#role_desc").val(data.role_desc);
+                $("#name").val(data.name);
+                $("#email").val(data.email);
+                $("#role_id").val(data.role_id);
+                $("#umur").val(data.umur);
+                $("#telp").val(data.telp);
+                $("#jenis_kel").val(data.jenis_kel);
+                $("#tgl_lahir, #old_tgl_lahir").val(data.tgl_lahir);
+                $("#alamat").val(data.alamat);
                 $("#editModal").modal('show');
             });
         });

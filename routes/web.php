@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Modul Web
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -39,4 +39,15 @@ Route::prefix('users')->group(function(){
 
     Route::post('/add','UserController@add')->name('users.add');
     Route::post('/edit','UserController@edit')->name('users.edit');
+});
+
+//Modul Mobile
+Route::group(['prefix' => 'api/v1'], function () {
+    //Modul User
+    Route::post('doLogin', 'MobileController@doLogin');
+    Route::post('doRegist', 'MobileController@doRegist');
+
+    //Modul Petani
+
+    //Modul Buruh
 });

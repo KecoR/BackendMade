@@ -25,7 +25,7 @@ class UserController extends Controller
             $user = new User;
             $user->name = $request->get('name');
             $user->email = $request->get('email');
-            $user->password = \Hash::make($request->password);
+            $user->password = \Hash::make($request->get('password'));
             $user->role_id = $request->get('role_id');
             $user->umur = $request->get('umur');
             $user->telp = $request->get('telp');
@@ -43,18 +43,33 @@ class UserController extends Controller
 
     public function getData($id)
     {
-        $role = Role::find($id);
+        $user = User::find($id);
 
-        return $role;
+        return $user;
     }
 
     public function edit(Request $request)
     {
-        $role = Role::find($request->id);
-        $role->role_desc = $request->get('role_desc');
-        $role->save();
+        $user = User::find($request->id);
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        if ($request->has('password')) {
+            $user->password = \Hash::make($request->get('password'));
+        }
+        $user->role_id = $request->get('role_id');
+        $user->umur = $request->get('umur');
+        $user->telp = $request->get('telp');
+        $user->jenis_kel = $request->get('jenis_kel');
+        if ($request->get('tgl_lahir')) {
+            $user->tgl_lahir = $request->get('tgl_lahir');
+        } else {
+            $user->tgl_lahir = $request->get('old_tgl_lahir');
+        }
+        
+        $user->alamat = $request->get('alamat');
+        $user->save();
 
-        return redirect()->route('roles')->with('status', 'Berhasil mengubah role');
+        return redirect()->route('users')->with('status', 'Berhasil mengubah user');
     }
 
     public function delete($id)
