@@ -41,6 +41,12 @@ Route::prefix('users')->group(function(){
     Route::post('/edit','UserController@edit')->name('users.edit');
 });
 
+Route::prefix('vacancy')->group(function(){
+    Route::get('/', 'VacancyController@index')->name('vacancy');
+    Route::get('/approve/{id}', 'VacancyController@approve')->name('vacancy.approve');
+    Route::get('/reject/{id}', 'VacancyController@reject')->name('vacancy.reject');
+});
+
 //Modul Mobile
 Route::group(['prefix' => 'api/v1'], function () {
     //Modul User

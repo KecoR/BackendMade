@@ -74,7 +74,7 @@
             <li class="dropdown">
                 <a href="{{ route('users') }}" class="nav-link"><i class="far fa-user"></i><span>Kelola User</span></a>
                 <a href="{{ route('roles') }}" class="nav-link"><i class="fas fa-user-tag"></i><span>Kelola Role</span></a>
-                <a href="#" class="nav-link"><i class="fas fa-briefcase"></i><span>Kelola Lowongan</span></a>
+                <a href="{{ route('vacancy') }}" class="nav-link"><i class="fas fa-briefcase"></i><span>Kelola Lowongan</span></a>
             </li>
           </ul>
         </aside>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <a href="#">
+                        <a href="{{ route('vacancy') }}">
                         <div class="card-icon bg-warning">
                             <i class="fas fa-briefcase"></i>
                             </div>

@@ -72,14 +72,13 @@ class MobileController extends Controller
     {
         $vacancy = new Vacancy;
         $vacancy->judul = $request->get('judul');
-        $vacancy->telp = $request->get('telp');
         $vacancy->gaji = $request->get('gaji');
         $vacancy->tipe_gaji = $request->get('tipe_gaji');
         $vacancy->slot = $request->get('slot');
-        $vacancy->buruh = $request->get('buruh');
         $vacancy->luas_lahan = $request->get('luas_lahan');
+        $vacancy->latitude = $request->get('latitude');
         $vacancy->longitude = $request->get('longitude');
-        $vacancy->pemilik_id = $request->get('pemilik_id');
+        $vacancy->pemilik_id = $id;
         $vacancy->save();
 
         return response()->json(['statusCode' => 1, 'data' => 'Data berhasil ditambah']);

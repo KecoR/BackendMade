@@ -15,16 +15,16 @@ class CreateVacancysTable extends Migration
     {
         Schema::create('vacancies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('judul');
+            $table->string('judul')->nullable();
             $table->longText('alamat')->nullable();
             $table->string('telp')->nullable();
-            $table->string('gaji');
-            $table->string('tipe_gaji');
-            $table->string('slot');
+            $table->string('gaji')->nullable();
+            $table->string('tipe_gaji')->nullable();
+            $table->string('slot')->nullable();
             $table->string('buruh')->default('0');
-            $table->string('luas_lahan');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('luas_lahan')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->char('status', 2)->default('0');
             $table->bigInteger('pemilik_id');
             $table->timestamps();
