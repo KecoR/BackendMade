@@ -59,4 +59,7 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::get('petani/{id}/vacancies', 'MobileController@petaniVacancies');
 
     //Modul Buruh
+    Route::get('buruh/{id}/latitude/{lat}/longitude/{lon}', 'MobileController@buruhVacancies');
+
+    Route::post('buruh/{id}/vacancy/{vacancyid}', 'MobileController@applyJob');
 });
