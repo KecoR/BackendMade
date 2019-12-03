@@ -47,7 +47,6 @@ class MobileController extends Controller
             $user->umur = $request->get('umur');
             $user->telp = $request->get('telp');
             $user->jenis_kel = $request->get('jenis_kel');
-            $user->tgl_lahir = $request->get('tgl_lahir');
             $user->alamat = $request->get('alamat');
             $user->save();
 

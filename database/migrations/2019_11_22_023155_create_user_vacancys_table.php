@@ -17,6 +17,7 @@ class CreateUserVacancysTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('vacancys_id');
             $table->bigInteger('pelamar_id');
+            $table->string('message_id');
             $table->timestamps();
 
 

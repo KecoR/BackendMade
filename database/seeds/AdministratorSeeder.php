@@ -15,6 +15,14 @@ class AdministratorSeeder extends Seeder
         $role->role_desc = "Administrator";
         $role->save();
 
+        $role = new \App\Role;
+        $role->role_desc = "Petani";
+        $role->save();
+
+        $role = new \App\Role;
+        $role->role_desc = "Buruh";
+        $role->save();
+
         $admin = new \App\User;
         $admin->email = "admin@admin.com";
         $admin->name = "Administrator";
