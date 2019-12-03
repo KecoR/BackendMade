@@ -1,0 +1,4 @@
+0 => Request
+-1 => Ditolak
+1 => Disetujui
+2 => Full

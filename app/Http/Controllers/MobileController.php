@@ -55,4 +55,35 @@ class MobileController extends Controller
             return response()->json(['statusCode' => 0, 'data' => 'Email Telah Digunakan']);
         }
     }
+
+    //Modul Petani
+    public function petaniVacancies($id)
+    {
+        $vacancy = Vacancy::where('pemilik_id', $id)->get();
+
+        if (!empty($vacancy)) {
+            return response()->json(['statusCode' => 1, 'data' => $vacancy]);
+        } else {
+            return response()->json(['statusCode' => 0, 'data' => 'Data tidak ditemukan']);
+        }
+    }
+
+    public function addVacancy(Request $request, $id)
+    {
+        $vacancy = new Vacancy;
+        $vacancy->judul = $request->get('judul');
+        $vacancy->telp = $request->get('telp');
+        $vacancy->gaji = $request->get('gaji');
+        $vacancy->tipe_gaji = $request->get('tipe_gaji');
+        $vacancy->slot = $request->get('slot');
+        $vacancy->buruh = $request->get('buruh');
+        $vacancy->luas_lahan = $request->get('luas_lahan');
+        $vacancy->longitude = $request->get('longitude');
+        $vacancy->pemilik_id = $request->get('pemilik_id');
+        $vacancy->save();
+
+        return response()->json(['statusCode' => 1, 'data' => 'Data berhasil ditambah']);
+    }
+
+    //Modul Buruh
 }

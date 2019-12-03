@@ -48,6 +48,9 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::post('doRegist', 'MobileController@doRegist');
 
     //Modul Petani
+    Route::post('petani/{id}/addVacancy', 'MobileController@addVacancy');
+
+    Route::get('petani/{id}/vacancies', 'MobileController@petaniVacancies');
 
     //Modul Buruh
 });
