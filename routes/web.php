@@ -50,16 +50,22 @@ Route::prefix('vacancy')->group(function(){
 //Modul Mobile
 Route::group(['prefix' => 'api/v1'], function () {
     //Modul User
+    Route::get('user/{id}/viewProfile', 'MobileController@viewProfile');
+
     Route::post('doLogin', 'MobileController@doLogin');
     Route::post('doRegist', 'MobileController@doRegist');
 
+    Route::put('user/{id}/editProfile', 'MobileController@editProfile');
     //Modul Petani
     Route::post('petani/{id}/addVacancy', 'MobileController@addVacancy');
 
     Route::get('petani/{id}/vacancies', 'MobileController@petaniVacancies');
+    Route::get('vacancy/{id}/viewBuruh', 'MobileController@viewBuruh');
 
     //Modul Buruh
     Route::get('buruh/{id}/latitude/{lat}/longitude/{lon}', 'MobileController@buruhVacancies');
+    Route::get('buruh/{id}/historyJob', 'MobileController@historyJob');
+    Route::get('vacancy/{id}', 'MobileController@getVacancy');
 
     Route::post('buruh/{id}/vacancy/{vacancyid}', 'MobileController@applyJob');
 });

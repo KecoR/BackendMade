@@ -56,6 +56,43 @@ class MobileController extends Controller
         }
     }
 
+    public function viewProfile($id)
+    {
+        $dataUser = User::find($id);
+
+        if (!empty($dataUser)) {
+            return response()->json(['statusCode' => 1, 'data' => $dataUser]);
+        } else {
+            return response()->json(['statusCode' => 0, 'data' => 'Data Tidak Ditemukan']);
+        }
+    }
+
+    public function editProfile(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $email = $request->get('email');
+        $email_old = $request->get('email_old');
+        $image = $request->get('image');
+        $birth = $request->get('date_birth');
+        $password = $request->get('password');
+
+        $finalBirth = date('Y-m-d', strtotime($birth));
+
+        if (!empty($user)) {
+            $user->name = $request->get('name');
+            $user->telp = $request->get('telp');
+            $user->alamat = $request->get('alamat');
+            $user->umur = $request->get('umur');
+            $user->jenis_kel = $request->get('jenis_kel');
+            $user->save();
+
+            return response()->json(['statusCode' => 1, 'data' => 'OK']);
+        } else {
+            return response()->json(['statusCode' => 0, 'data' => 'User Tidak Ditemukan']);
+        }
+    }
+
     //Modul Petani
     public function petaniVacancies($id)
     {
@@ -84,6 +121,17 @@ class MobileController extends Controller
         return response()->json(['statusCode' => 1, 'data' => 'Data berhasil ditambah']);
     }
 
+    public function viewBuruh($id)
+    {
+        $userVac = UserVacancy::with('buruh')->get();
+
+        if ($userVac->count() > 0) {
+            return response()->json(['statusCode' => 1, 'data' => $userVac]);
+        } else {
+            return response()->json(['statusCode' => 0, 'data' => 'Data Tidak Ditemukan']);
+        }
+    }
+
     //Modul Buruh
     public function buruhVacancies($id, $lat, $lon)
     {
@@ -102,11 +150,23 @@ class MobileController extends Controller
         } else {
             return response()->json(['statusCode' => 0, 'data' => 'Data tidak ditemukan']);
         }
+        
+    }
+
+    public function getVacancy($id)
+    {
+        $vacancy = Vacancy::find($id);
+
+        if (!empty($vacancy)) {
+            return response()->json(['statusCode' => 1, 'data' => $vacancy]);
+        } else {
+            return response()->json(['statusCode' => 0, 'data' => 'Data Tidak Ditemukan']);
+        }
     }
 
     public function applyJob(Request $request, $id, $vacancyid)
     {
-        $vacancy = Vacancy::find($id);
+        $vacancy = Vacancy::find($vacancyid);
 
         if (!empty($vacancy)) {
             if ($vacancy->buruh < $vacancy->slot) {
@@ -129,6 +189,17 @@ class MobileController extends Controller
             return response()->json(['statusCode' => 0, 'data' => 'Data Tidak Ditemukan']);
         }
         
+    }
+
+    public function historyJob($id)
+    {
+        $userVac = UserVacancy::where('pelamar_id', $id)->with('vacancy', 'vacancy.pemilik')->get();
+
+        if ($userVac->count() > 0) {
+            return response()->json(['statusCode' => 1, 'data' => $userVac]);
+        } else {
+            return response()->json(['statusCode' => 0, 'data'=> 'Data Tidak Ditemukan']);
+        }
     }
 
     protected function haversineMethod($lat1, $lon1, $lat2, $lon2)
