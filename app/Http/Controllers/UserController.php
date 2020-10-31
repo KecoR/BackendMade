@@ -74,10 +74,10 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        $role = Role::find($id);
+        $user = User::find($id);
 
-        $role->delete();
+        $user->delete();
 
-        return redirect()->route('roles')->with('status', 'Berhasil menghapus role');
+        return redirect()->route('users')->with('status', 'Berhasil menghapus user');
     }
 }

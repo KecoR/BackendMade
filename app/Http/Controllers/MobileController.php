@@ -123,7 +123,7 @@ class MobileController extends Controller
 
     public function viewBuruh($id)
     {
-        $userVac = UserVacancy::with('buruh')->get();
+        $userVac = UserVacancy::where('vacancys_id', $id)->with('buruh')->get();
 
         if ($userVac->count() > 0) {
             return response()->json(['statusCode' => 1, 'data' => $userVac]);
